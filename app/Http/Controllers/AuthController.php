@@ -14,14 +14,14 @@ class AuthController extends Controller
     {
         //validate fields
         $attrs = $request->validate([
-            'username' => 'required|string',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed'
         ]);
 
         //create user
         $user = User::create([
-            'username' => $attrs['username'],
+            'name' => $attrs['name'],
             'email' => $attrs['email'],
             'password' => bcrypt($attrs['password'])
         ]);
@@ -81,12 +81,12 @@ class AuthController extends Controller
     public function update(Request $request, User $user)
     {
         $attrs = $request->validate([
-            'username' => 'required|unique:users,username,' . $user->id,
+            'name' => 'required|unique:users,name,' . $user->id,
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'required|min:6',
         ]);
 
-        $user->username =  $attrs['username'];
+        $user->name =  $attrs['name'];
         $user->email = $attrs['email'];
         $user->password = Hash::make($attrs['password']);
         $user->save();

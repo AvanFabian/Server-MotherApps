@@ -13,9 +13,13 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
+        // date, header, subheader
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->date('date')->nullable();
+            $table->string('header');
+            $table->string('subheader');
             $table->string('body');
             $table->string('image')->nullable();
             $table->timestamps();
