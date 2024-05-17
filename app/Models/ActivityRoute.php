@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SportsActivity extends Model
+class ActivityRoute extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'sport_type',
-        'sport_movement',
-        'calories_burned_prediction',
+        'activity_record_id',
+        'latitude',
+        'longitude',
     ];
 
     public function activityRecord()

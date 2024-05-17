@@ -16,7 +16,18 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('activity_id');
             $table->integer('duration');
-            $table->date('date');
+            // jarak tempuh
+            $table->integer('distance');
+            // detak jantung
+            $table->integer('heart_rate');
+            // kelembaban
+            $table->integer('humidity');
+            // waktu rehidrasi
+            $table->integer('rehydration_time');
+            // hari pertama haid terakhir
+            $table->date('last_menstrual_period');
+            // keluhan
+            $table->text('complaints');
             $table->timestamps();
         });
     }

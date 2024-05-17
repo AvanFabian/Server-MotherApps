@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('activity_routes', function (Blueprint $table) {
             $table->id();
-            // activity_record_id, latitude, longitude
-            $table->integer('activity_record_id');
+            $table->foreignId('activity_record_id');
             $table->float('latitude');
             $table->float('longitude');
             $table->timestamps();
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('activity_routes');
     }
 };

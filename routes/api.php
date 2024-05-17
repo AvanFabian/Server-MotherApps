@@ -6,7 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
-
+use App\Http\Controllers\SportsActivityController;
+use App\Http\Controllers\ActivityRecordController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,4 +45,18 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     // Like
     Route::post('/posts/{id}/likes', [LikeController::class, 'likeOrUnlike']); // like or dislike back a post
+
+    // Sports Activities
+    Route::get('/sports_activities', [SportsActivityController::class, 'index']); // all sports activities
+    Route::post('/sports_activities', [SportsActivityController::class, 'store']); // create sports activity
+    Route::get('/sports_activities/{id}', [SportsActivityController::class, 'show']); // get single sports activity
+    Route::put('/sports_activities/{id}', [SportsActivityController::class, 'update']); // update sports activity
+    Route::delete('/sports_activities/{id}', [SportsActivityController::class, 'destroy']); // delete sports activity
+
+    // Activity Records
+    Route::get('/activity_records', [ActivityRecordController::class, 'index']); // all activity records
+    Route::post('/activity_records', [ActivityRecordController::class, 'store']); // create activity record
+    Route::get('/activity_records/{id}', [ActivityRecordController::class, 'show']); // get single activity record
+    Route::put('/activity_records/{id}', [ActivityRecordController::class, 'update']); // update activity record
+    Route::delete('/activity_records/{id}', [ActivityRecordController::class, 'destroy']); // delete activity record
 });

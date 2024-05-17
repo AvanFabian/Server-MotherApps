@@ -13,11 +13,11 @@ class PostController extends Controller
     {
         return response([
             'posts' => Post::orderBy('created_at', 'desc')->with('user:id,name,image')->withCount('comments', 'likes')
-            ->with('likes', function($like){
-                return $like->where('user_id', auth()->user()->id)
-                    ->select('id', 'user_id', 'post_id')->get();
-            })
-            ->get()
+                ->with('likes', function ($like) {
+                    return $like->where('user_id', auth()->user()->id)
+                        ->select('id', 'user_id', 'post_id')->get();
+                })
+                ->get()
         ], 200);
     }
 
@@ -34,12 +34,16 @@ class PostController extends Controller
     {
         //validate fields
         $attrs = $request->validate([
+            'header' => 'required|string',
+            'subheader' => 'required|string',
             'body' => 'required|string'
         ]);
 
         $image = $this->saveImage($request->image, 'posts');
 
         $post = Post::create([
+            'header' => $attrs['header'],
+            'subheader' => $attrs['subheader'],
             'body' => $attrs['body'],
             'user_id' => auth()->user()->id,
             'image' => $image
@@ -58,30 +62,27 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if(!$post)
-        {
+        if (!$post) {
             return response([
                 'message' => 'Post not found.'
             ], 403);
         }
 
-        if($post->user_id != auth()->user()->id)
-        {
+        if ($post->user_id != auth()->user()->id) {
             return response([
                 'message' => 'Permission denied.'
             ], 403);
         }
-
-        //validate fields
-        $attrs = $request->validate([
-            'body' => 'required|string'
-        ]);
+        
+        $image = $this->saveImage($request->image, 'posts');
 
         $post->update([
-            'body' =>  $attrs['body']
+            'header' => $request->input('header'),
+            'subheader' => $request->input('subheader'),
+            'body' =>  $request->input('body'),
+            'image' => $image
         ]);
 
-        // for now skip for post image
 
         return response([
             'message' => 'Post updated.',
@@ -94,15 +95,13 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if(!$post)
-        {
+        if (!$post) {
             return response([
                 'message' => 'Post not found.'
             ], 403);
         }
 
-        if($post->user_id != auth()->user()->id)
-        {
+        if ($post->user_id != auth()->user()->id) {
             return response([
                 'message' => 'Permission denied.'
             ], 403);
