@@ -27,6 +27,10 @@ class ActivityRecord extends Model
     {
         return $this->belongsTo(SportsActivity::class, 'activity_id');
     }
+    public function sportsMovements()
+    {
+        return $this->belongsToMany(SportsMovement::class);
+    }
     public function activityRoute()
     {
         return $this->hasOne(ActivityRoute::class);

@@ -47,11 +47,15 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/posts/{id}/likes', [LikeController::class, 'likeOrUnlike']); // like or dislike back a post
 
     // Sports Activities
-    Route::get('/sports_activities', [SportsActivityController::class, 'index']); // all sports activities
+    // Route::get('/sports_activities', [SportsActivityController::class, 'index']); // all sports activities
     Route::post('/sports_activities', [SportsActivityController::class, 'store']); // create sports activity
     Route::get('/sports_activities/{id}', [SportsActivityController::class, 'show']); // get single sports activity
     Route::put('/sports_activities/{id}', [SportsActivityController::class, 'update']); // update sports activity
     Route::delete('/sports_activities/{id}', [SportsActivityController::class, 'destroy']); // delete sports activity
+
+    // Sports Activities by name and movements
+    Route::get('/sports_activities', [SportsActivityController::class, 'getByName']);
+    Route::get('/sport_movements', [SportsActivityController::class, 'getMovementsByActivityName']);
 
     // Activity Records
     Route::get('/activity_records', [ActivityRecordController::class, 'index']); // all activity records

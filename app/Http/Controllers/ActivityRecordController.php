@@ -14,15 +14,15 @@ class ActivityRecordController extends Controller
 
     public function store(Request $request)
     {
-      $activityRecord = new ActivityRecord;
-      $activityRecord->user_id = $request->user_id;
-      $activityRecord->activity_name = $request->activity_name;
-      $activityRecord->sub_movement = $request->sub_movement;
-      $activityRecord->duration = $request->duration;
-      $activityRecord->calories_prediction = $request->calories_prediction; // Handle the calories_prediction
-      $activityRecord->save();
-    
-      return response()->json($activityRecord, 201);
+        $activityRecord = new ActivityRecord;
+        $activityRecord->user_id = $request->user()->id;
+        $activityRecord->sport_activity_id = $request->sport_activity_id;
+        $activityRecord->duration = $request->duration;
+        $activityRecord->save();
+
+        $activityRecord->sportsMovements()->sync($request->sport_movement_ids);
+
+        return response()->json($activityRecord, 201);
     }
 
     public function show(ActivityRecord $activityRecord)

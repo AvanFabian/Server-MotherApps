@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('sport_movement_ids');
             $table->integer('duration');
             $table->integer('distance')->nullable();
-            $table->integer('calories_prediction');
+            $table->integer('calories_prediction')->nullable();
             $table->timestamps();
         
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('sport_activity_id')->references('id')->on('sport_activities')->onDelete('cascade');
+            $table->foreign('sport_activity_id')->references('id')->on('sports_activities')->onDelete('cascade');
         });
     }
 

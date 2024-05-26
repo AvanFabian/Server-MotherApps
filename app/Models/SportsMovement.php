@@ -13,4 +13,14 @@ class SportsMovement extends Model
         'sports_activity_id',
         'name',
     ];
+
+    public function activityRecords()
+    {
+        return $this->belongsToMany(ActivityRecord::class);
+    }
+
+    public function sportsActivity()
+    {
+        return $this->belongsTo(SportsActivity::class);
+    }
 }

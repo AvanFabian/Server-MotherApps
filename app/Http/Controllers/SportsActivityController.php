@@ -7,10 +7,29 @@ use App\Models\SportsActivity;
 
 class SportsActivityController extends Controller
 {
-    public function index()
+
+    // In SportsActivityController
+
+    public function getByName(Request $request)
     {
-        return SportsActivity::all();
+        $name = $request->query('name');
+        $activity = SportsActivity::where('name', $name)->first();
+        return response()->json($activity);
     }
+
+    public function getMovementsByActivityName(Request $request)
+    {
+        $activity_name = $request->query('activity_name');
+        $activity = SportsActivity::where('name', $activity_name)->first();
+        $movements = $activity->movements; // Assuming you have a relationship set up
+        return response()->json($movements);
+    }
+
+
+    // public function index()
+    // {
+    //     return SportsActivity::all();
+    // }
 
     public function store(Request $request)
     {

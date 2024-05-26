@@ -14,8 +14,13 @@ class SportsActivity extends Model
         'calories_burned_prediction',
     ];
 
-    public function activityRecord()
+    public function activityRecords()
     {
-        return $this->belongsTo(ActivityRecord::class);
+        return $this->hasMany(ActivityRecord::class);
+    }
+
+    public function sportsMovements()
+    {
+        return $this->hasMany(SportsMovement::class);
     }
 }
