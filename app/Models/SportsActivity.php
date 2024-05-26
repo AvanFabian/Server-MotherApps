@@ -11,7 +11,6 @@ class SportsActivity extends Model
 
     protected $fillable = [
         'sport_type',
-        'sport_movement',
         'calories_burned_prediction',
     ];
 

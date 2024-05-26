@@ -14,15 +14,15 @@ class ActivityRecordController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'activity_id' => 'required',
-            'duration' => 'required',
-            'distance' => 'required',
-            'heart_rate' => 'required',
-        ]);
-
-        return ActivityRecord::create($request->all());
+      $activityRecord = new ActivityRecord;
+      $activityRecord->user_id = $request->user_id;
+      $activityRecord->activity_name = $request->activity_name;
+      $activityRecord->sub_movement = $request->sub_movement;
+      $activityRecord->duration = $request->duration;
+      $activityRecord->calories_prediction = $request->calories_prediction; // Handle the calories_prediction
+      $activityRecord->save();
+    
+      return response()->json($activityRecord, 201);
     }
 
     public function show(ActivityRecord $activityRecord)

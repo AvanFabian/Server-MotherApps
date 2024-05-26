@@ -11,14 +11,11 @@ class ActivityRecord extends Model
 
     protected $fillable = [
         'user_id',
-        'activity_id',
+        'sport_activity_id',
+        'sport_movement_ids',
         'duration',
         'distance',
-        'heart_rate',
-        'humidity',
-        'rehydration_time',
-        'last_menstrual_period',
-        'complaints',
+        'calories_prediction',
     ];
 
     public function user()

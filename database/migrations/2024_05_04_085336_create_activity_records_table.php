@@ -13,22 +13,16 @@ return new class extends Migration
     {
         Schema::create('activity_records', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('activity_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('sport_activity_id');
+            $table->string('sport_movement_ids');
             $table->integer('duration');
-            // jarak tempuh
-            $table->integer('distance');
-            // detak jantung
-            $table->integer('heart_rate');
-            // kelembaban
-            $table->integer('humidity');
-            // waktu rehidrasi
-            $table->integer('rehydration_time');
-            // hari pertama haid terakhir
-            $table->date('last_menstrual_period');
-            // keluhan
-            $table->text('complaints');
+            $table->integer('distance')->nullable();
+            $table->integer('calories_prediction');
             $table->timestamps();
+        
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sport_activity_id')->references('id')->on('sport_activities')->onDelete('cascade');
         });
     }
 
