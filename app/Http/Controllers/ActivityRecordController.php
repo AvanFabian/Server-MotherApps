@@ -20,6 +20,7 @@ class ActivityRecordController extends Controller
     //     $activityRecord->user_id = $request->user()->id;
     //     $activityRecord->sport_activity_id = $request->sport_activity_id;
     //     $activityRecord->duration = $request->duration;
+    //     $activityRecord->sport_movement_ids = $request->sport_movement_ids ?? ''; // Provide a default value
     //     $activityRecord->save();
 
     //     if ($request->has('sport_movement_ids')) {
@@ -36,14 +37,13 @@ class ActivityRecordController extends Controller
         $activityRecord->user_id = $request->user()->id;
         $activityRecord->sport_activity_id = $request->sport_activity_id;
         $activityRecord->duration = $request->duration;
-        $activityRecord->sport_movement_ids = $request->sport_movement_ids ?? ''; // Provide a default value
         $activityRecord->save();
-
+    
         if ($request->has('sport_movement_ids')) {
-            $sportsMovements = SportsMovement::findMany($request->sport_movement_ids);
-            $activityRecord->sportsMovements()->attach($sportsMovements);
+            $sport_movement_ids = is_array($request->sport_movement_ids) ? $request->sport_movement_ids : explode(',', $request->sport_movement_ids);
+            $activityRecord->sportsMovements()->attach($sport_movement_ids);
         }
-
+    
         return response()->json($activityRecord->load('sportsMovements'), 201);
     }
 
@@ -61,9 +61,17 @@ class ActivityRecordController extends Controller
         }
 
         // Transform the data to include sport_name and sport_movement in the response
+        // $transformedRecords = $activityRecords->map(function ($record) {
+        //     Log::info('Record: ' . $record->toJson());
+        //     $record->sport_name = $record->sportsActivity && $record->sportsActivity->name ? $record->sportsActivity->name : 'N/A';
+        //     $record->sport_movement = $record->sportsMovements && $record->sportsMovements->pluck('name')->join(', ') ? $record->sportsMovements->pluck('name')->join(', ') : 'N/A';
+        //     return $record;
+        // });
+
         $transformedRecords = $activityRecords->map(function ($record) {
-            $record->sport_name = $record->sportsActivity && $record->sportsActivity->name ? $record->sportsActivity->name : 'N/A';
-            $record->sport_movement = $record->sportsMovements && $record->sportsMovements->pluck('name')->join(', ') ? $record->sportsMovements->pluck('name')->join(', ') : 'N/A';
+            Log::info('Record: ' . $record->toJson());
+            $record->sport_name = optional($record->sportsActivity)->name ?? 'N/A';
+            $record->sport_movement = $record->sportsMovements->pluck('name')->join(', ') ?: 'N/A';
             return $record;
         });
 

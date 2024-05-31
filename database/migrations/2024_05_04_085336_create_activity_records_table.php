@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('activity_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('sport_activity_id');
-            $table->string('sport_movement_ids');
+            $table->unsignedBigInteger('sport_activity_id');;
             $table->integer('duration');
             $table->integer('distance')->nullable();
             $table->integer('calories_prediction')->nullable();

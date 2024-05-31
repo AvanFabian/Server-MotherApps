@@ -12,7 +12,6 @@ class ActivityRecord extends Model
     protected $fillable = [
         'user_id',
         'sport_activity_id',
-        'sport_movement_ids',
         'duration',
         'distance',
         'calories_prediction',
@@ -31,7 +30,7 @@ class ActivityRecord extends Model
     {
         return $this->belongsToMany(SportsMovement::class, 'activity_record_sports_movement');
     }
-    
+
     public function activityRoute()
     {
         return $this->hasOne(ActivityRoute::class);
