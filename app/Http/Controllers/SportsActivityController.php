@@ -4,38 +4,70 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SportsActivity;
+use App\Models\SportsMovement;
 
 class SportsActivityController extends Controller
 {
 
     // In SportsActivityController
 
-    public function getByName(Request $request)
+    public function getAll()
     {
-        $name = $request->query('name');
-        $activity = SportsActivity::where('name', $name)->first();
-        return response()->json($activity);
+        $activities = SportsActivity::all();
+        return response()->json($activities);
     }
 
     public function getMovementsByActivityName(Request $request)
     {
         $activity_name = $request->query('activity_name');
-        $activity = SportsActivity::where('name', $activity_name)->first();
-        $movements = $activity->movements; // Assuming you have a relationship set up
+        $activity = SportsActivity::where('sport_type', $activity_name)->first();
+        if ($activity === null) {
+            // Return an error response if no matching activity was found
+            return response()->json(['error' => 'No activity found with the given name'], 404);
+        }
+        $movements = $activity->sportsMovements;
         return response()->json($movements);
     }
 
+    public function getSportActivityId(Request $request)
+    {
+        $activity_name = $request->query('activity_name');
+        $activity = SportsActivity::where('sport_type', $activity_name)->first();
+        if ($activity === null) {
+            // Return an error response if no matching activity was found
+            return response()->json(['error' => 'No activity found with the given name'], 404);
+        }
+        return response()->json($activity->id);
+    }
 
-    // public function index()
+    // public function getSportMovementId(Request $request)
     // {
-    //     return SportsActivity::all();
+    //     $activity_name = $request->query('activity_name');
+    //     $activity = SportsActivity::where('sport_type', $activity_name)->first();
+    //     if ($activity === null) {
+    //         // Return an error response if no matching activity was found
+    //         return response()->json(['error' => 'No activity found with the given name'], 404);
+    //     }
+    //     $movement_ids = $activity->sportsMovements->pluck('id');
+    //     return response()->json($movement_ids);
     // }
+
+    public function getSportMovementId(Request $request)
+    {
+        $movement_name = $request->query('activity_name');
+        $movement = SportsMovement::where('name', $movement_name)->first();
+        if ($movement === null) {
+            // Return an error response if no matching movement was found
+            return response()->json(['error' => 'No movement found with the given name'], 404);
+        }
+        return response()->json($movement->id);
+    }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'sport_type' => 'required',
+            'calories_burned_prediction' => 'required',
         ]);
 
         return SportsActivity::create($request->all());

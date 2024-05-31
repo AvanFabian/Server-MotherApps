@@ -25,12 +25,13 @@ class ActivityRecord extends Model
 
     public function sportsActivity()
     {
-        return $this->belongsTo(SportsActivity::class, 'activity_id');
+        return $this->belongsTo(SportsActivity::class, 'sport_activity_id');
     }
     public function sportsMovements()
     {
-        return $this->belongsToMany(SportsMovement::class);
+        return $this->belongsToMany(SportsMovement::class, 'activity_record_sports_movement');
     }
+    
     public function activityRoute()
     {
         return $this->hasOne(ActivityRoute::class);

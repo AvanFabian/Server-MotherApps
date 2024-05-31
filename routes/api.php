@@ -19,11 +19,11 @@ use App\Http\Controllers\ActivityRecordController;
 |
 */
 // Public routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Protected Routes
-Route::group(['middleware' => ['auth:sanctum']], function() {
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // User
     Route::get('/user', [AuthController::class, 'user']);
@@ -47,20 +47,21 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('/posts/{id}/likes', [LikeController::class, 'likeOrUnlike']); // like or dislike back a post
 
     // Sports Activities
-    // Route::get('/sports_activities', [SportsActivityController::class, 'index']); // all sports activities
+    Route::get('/sports_activities', [SportsActivityController::class, 'getAll']);
     Route::post('/sports_activities', [SportsActivityController::class, 'store']); // create sports activity
     Route::get('/sports_activities/{id}', [SportsActivityController::class, 'show']); // get single sports activity
     Route::put('/sports_activities/{id}', [SportsActivityController::class, 'update']); // update sports activity
     Route::delete('/sports_activities/{id}', [SportsActivityController::class, 'destroy']); // delete sports activity
+    Route::get('/sports_movements', [SportsActivityController::class, 'getMovementsByActivityName']);
 
-    // Sports Activities by name and movements
-    Route::get('/sports_activities', [SportsActivityController::class, 'getByName']);
-    Route::get('/sport_movements', [SportsActivityController::class, 'getMovementsByActivityName']);
+    // get sports activity id and movement id
+    Route::get('/sports_activity_id', [SportsActivityController::class, 'getSportActivityId']);
+    Route::get('/sports_movement_id', [SportsActivityController::class, 'getSportMovementId']);
 
     // Activity Records
     Route::get('/activity_records', [ActivityRecordController::class, 'index']); // all activity records
     Route::post('/activity_records', [ActivityRecordController::class, 'store']); // create activity record
-    Route::get('/activity_records/{id}', [ActivityRecordController::class, 'show']); // get single activity record
+    Route::get('/activity_records/user/{userId}', [ActivityRecordController::class, 'show']); // get all activity records of a user
     Route::put('/activity_records/{id}', [ActivityRecordController::class, 'update']); // update activity record
     Route::delete('/activity_records/{id}', [ActivityRecordController::class, 'destroy']); // delete activity record
 });

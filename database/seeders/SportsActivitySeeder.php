@@ -17,9 +17,16 @@ class SportsActivitySeeder extends Seeder
     {
         SportsActivity::create([
             'sport_type' => 'Jogging',
-            'calories_burned_prediction' => 100, // Replace with your own value
+            'calories_burned_prediction' => 100,
         ]);
-
-        // Add more sports activities as needed
+        SportsActivity::create([
+            'sport_type' => 'Swimming',
+            'calories_burned_prediction' => 200,
+        ]);
+        SportsActivity::create([
+            'sport_type' => 'Cycling',
+            'calories_burned_prediction' => 150,
+        ]);
+        
     }
 }
