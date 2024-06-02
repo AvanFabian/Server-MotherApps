@@ -16,17 +16,26 @@ class SportsActivitySeeder extends Seeder
     public function run()
     {
         SportsActivity::create([
-            'sport_type' => 'Jogging',
-            'calories_burned_prediction' => 100,
+            'sport_type' => 'Aerobic/Cardio',
+            'usual_duration' => '30 minutes',
+            
         ]);
         SportsActivity::create([
-            'sport_type' => 'Swimming',
-            'calories_burned_prediction' => 200,
+            'sport_type' => 'Resistence',
+            'usual_duration' => '30 minutes',
         ]);
         SportsActivity::create([
-            'sport_type' => 'Cycling',
-            'calories_burned_prediction' => 150,
+            'sport_type' => 'Flexibility',
+            'usual_duration' => '30 minutes',
         ]);
-        
+        SportsActivity::create([
+            'sport_type' => 'Neuromotor',
+            'usual_duration' => '30 minutes',
+
+        ]);
+        SportsActivity::create([
+            'sport_type' => 'Pelvic Floor Training', 
+            'usual_duration' => '30 minutes',
+        ]);
     }
 }

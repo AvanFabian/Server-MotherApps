@@ -17,6 +17,19 @@ class ActivityRecord extends Model
         'calories_prediction',
     ];
 
+    protected $appends = ['sport_name', 'sport_movement'];
+
+    public function getSportNameAttribute()
+    {
+        return optional($this->sportsActivity)->sport_type ?? 'N/A';
+    }
+
+    public function getSportMovementAttribute()
+    {
+        return $this->sportsMovements->pluck('name')->join(', ') ?: 'N/A';
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);

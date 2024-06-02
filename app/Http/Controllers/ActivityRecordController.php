@@ -60,14 +60,6 @@ class ActivityRecordController extends Controller
             Log::info('SportsMovements: ' . $record->sportsMovements->toJson());
         }
 
-        // Transform the data to include sport_name and sport_movement in the response
-        // $transformedRecords = $activityRecords->map(function ($record) {
-        //     Log::info('Record: ' . $record->toJson());
-        //     $record->sport_name = $record->sportsActivity && $record->sportsActivity->name ? $record->sportsActivity->name : 'N/A';
-        //     $record->sport_movement = $record->sportsMovements && $record->sportsMovements->pluck('name')->join(', ') ? $record->sportsMovements->pluck('name')->join(', ') : 'N/A';
-        //     return $record;
-        // });
-
         $transformedRecords = $activityRecords->map(function ($record) {
             Log::info('Record: ' . $record->toJson());
             $record->sport_name = optional($record->sportsActivity)->name ?? 'N/A';
