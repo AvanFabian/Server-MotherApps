@@ -18,7 +18,6 @@ class SportsActivitySeeder extends Seeder
         SportsActivity::create([
             'sport_type' => 'Aerobic/Cardio',
             'usual_duration' => '30 minutes',
-            
         ]);
         SportsActivity::create([
             'sport_type' => 'Resistence',
