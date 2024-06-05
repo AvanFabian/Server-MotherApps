@@ -63,12 +63,20 @@ class SportsActivityController extends Controller
         // Fetch the calories_burned_prediction for each selected sport movement
         $predictions = DB::table('sports_movements')
             ->whereIn('id', explode(',', $ids))
-            ->pluck('calories_burned_prediction');
+            ->pluck('calories_burned_prediction', 'id'); // Use 'id' as the key
 
         Log::info('Predictions: ' . json_encode($predictions));
 
         // Return the predictions as a JSON response
         return response()->json($predictions);
+        // $predictions = DB::table('sports_movements')
+        //     ->whereIn('id', explode(',', $ids))
+        //     ->pluck('calories_burned_prediction');
+
+        // Log::info('Predictions: ' . json_encode($predictions));
+
+        // // Return the predictions as a JSON response
+        // return response()->json($predictions);
     }
 
     public function store(Request $request)
