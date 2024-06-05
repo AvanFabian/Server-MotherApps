@@ -14,22 +14,6 @@ class ActivityRecordController extends Controller
         return ActivityRecord::all();
     }
 
-    // public function store(Request $request)
-    // {
-    //     $activityRecord = new ActivityRecord;
-    //     $activityRecord->user_id = $request->user()->id;
-    //     $activityRecord->sport_activity_id = $request->sport_activity_id;
-    //     $activityRecord->duration = $request->duration;
-    //     $activityRecord->sport_movement_ids = $request->sport_movement_ids ?? ''; // Provide a default value
-    //     $activityRecord->save();
-
-    //     if ($request->has('sport_movement_ids')) {
-    //         $sportsMovements = SportsMovement::findMany($request->sport_movement_ids);
-    //         $activityRecord->sportsMovements()->attach($sportsMovements);
-    //     }
-
-    //     return response()->json($activityRecord->load('sportsMovements'), 201);
-    // }
 
     public function store(Request $request)
     {
@@ -37,6 +21,7 @@ class ActivityRecordController extends Controller
         $activityRecord->user_id = $request->user()->id;
         $activityRecord->sport_activity_id = $request->sport_activity_id;
         $activityRecord->duration = $request->duration;
+        $activityRecord->total_calories_burned = $request->total_calories_burned;
         $activityRecord->save();
     
         if ($request->has('sport_movement_ids')) {

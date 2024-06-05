@@ -17,24 +17,24 @@ class SportsActivitySeeder extends Seeder
     {
         SportsActivity::create([
             'sport_type' => 'Aerobic/Cardio',
-            'usual_duration' => '30 minutes',
+            // 'usual_duration' => '30 minutes',
         ]);
         SportsActivity::create([
             'sport_type' => 'Resistence',
-            'usual_duration' => '30 minutes',
+            // 'usual_duration' => '30 minutes',
         ]);
         SportsActivity::create([
             'sport_type' => 'Flexibility',
-            'usual_duration' => '30 minutes',
+            // 'usual_duration' => '30 minutes',
         ]);
         SportsActivity::create([
             'sport_type' => 'Neuromotor',
-            'usual_duration' => '30 minutes',
+            // 'usual_duration' => '30 minutes',
 
         ]);
         SportsActivity::create([
             'sport_type' => 'Pelvic Floor Training', 
-            'usual_duration' => '30 minutes',
+            // 'usual_duration' => '30 minutes',
         ]);
     }
 }

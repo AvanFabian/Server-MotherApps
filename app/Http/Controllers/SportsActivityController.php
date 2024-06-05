@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SportsActivity;
 use App\Models\SportsMovement;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SportsActivityController extends Controller
 {
@@ -17,6 +19,7 @@ class SportsActivityController extends Controller
         return response()->json($activities);
     }
 
+    // TODO: abaikan dulu soale ga dipake tapi jgn dihapus atau dikomen
     public function getMovementsByActivityName(Request $request)
     {
         $activity_name = $request->query('activity_name');
@@ -40,17 +43,6 @@ class SportsActivityController extends Controller
         return response()->json($activity->id);
     }
 
-    // public function getSportMovementId(Request $request)
-    // {
-    //     $activity_name = $request->query('activity_name');
-    //     $activity = SportsActivity::where('sport_type', $activity_name)->first();
-    //     if ($activity === null) {
-    //         // Return an error response if no matching activity was found
-    //         return response()->json(['error' => 'No activity found with the given name'], 404);
-    //     }
-    //     $movement_ids = $activity->sportsMovements->pluck('id');
-    //     return response()->json($movement_ids);
-    // }
 
     public function getSportMovementId(Request $request)
     {
@@ -61,6 +53,22 @@ class SportsActivityController extends Controller
             return response()->json(['error' => 'No movement found with the given name'], 404);
         }
         return response()->json($movement->id);
+    }
+
+    public function getCaloriesBurnedPredictions(Request $request)
+    {
+        // Get the IDs of the selected sport movements from the request
+        $ids = $request->get('ids');
+        Log::info('IDs: ' . $ids);
+        // Fetch the calories_burned_prediction for each selected sport movement
+        $predictions = DB::table('sports_movements')
+            ->whereIn('id', explode(',', $ids))
+            ->pluck('calories_burned_prediction');
+
+        Log::info('Predictions: ' . json_encode($predictions));
+
+        // Return the predictions as a JSON response
+        return response()->json($predictions);
     }
 
     public function store(Request $request)

@@ -52,11 +52,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/sports_activities/{id}', [SportsActivityController::class, 'show']); // get single sports activity
     Route::put('/sports_activities/{id}', [SportsActivityController::class, 'update']); // update sports activity
     Route::delete('/sports_activities/{id}', [SportsActivityController::class, 'destroy']); // delete sports activity
-    Route::get('/sports_movements', [SportsActivityController::class, 'getMovementsByActivityName']);
 
-    // get sports activity id and movement id
+    // get sports activity id and movement id and calories burned predictions
     Route::get('/sports_activity_id', [SportsActivityController::class, 'getSportActivityId']);
     Route::get('/sports_movement_id', [SportsActivityController::class, 'getSportMovementId']);
+    Route::get('/sports_movements/calories', [SportsActivityController::class, 'getCaloriesBurnedPredictions']);
+
+    Route::get('/sports_movements', [SportsActivityController::class, 'getMovementsByActivityName']); // TODO: abaikan dulu soale ga dipake tapi jgn dihapus atau dikomen
 
     // Activity Records
     Route::get('/activity_records', [ActivityRecordController::class, 'index']); // all activity records

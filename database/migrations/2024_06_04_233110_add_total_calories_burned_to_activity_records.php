@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sports_activities', function (Blueprint $table) {
-            $table->id();
-            $table->string('sport_type');
-            // $table->string('calories_burned_prediction');
-            $table->timestamps();
+        Schema::table('activity_records', function (Blueprint $table) {
+            $table->integer('total_calories_burned')->after('duration');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sports_activities');
+        Schema::table('activity_records', function (Blueprint $table) {
+            //
+        });
     }
 };
