@@ -24,6 +24,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('activity_records');
+        Schema::dropIfExists('activity_routes');
+        Schema::dropIfExists('activity_record_sports_movement');
+        Schema::dropIfExists('sports_movements');
         Schema::dropIfExists('sports_activities');
+        Schema::dropIfExists('users');
     }
 };
