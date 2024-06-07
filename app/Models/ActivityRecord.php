@@ -15,6 +15,7 @@ class ActivityRecord extends Model
         'duration',
         'distance',
         'calories_prediction',
+        'total_calories_burned',
     ];
 
     protected $appends = ['sport_name', 'sport_movement'];
