@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('activity_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('sport_activity_id');;
+            $table->unsignedBigInteger('sport_activity_id');
             $table->integer('duration');
             $table->integer('distance')->nullable();
-            $table->integer('calories_prediction')->nullable();
+            $table->double('total_calories_burned');
             $table->timestamps();
         
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
