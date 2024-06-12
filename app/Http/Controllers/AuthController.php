@@ -69,13 +69,20 @@ class AuthController extends Controller
         ], 200);
     }
 
-    // get user details
+    // get single user details
     public function user()
     {
         return response([
             'user' => auth()->user()
         ], 200);
     }
+
+    // get all users
+    public function allUsers()
+{
+    $users = User::all();
+    return response(['users' => $users], 200);
+}
 
     // Update a specific user
     public function update(Request $request, User $user)

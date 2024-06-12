@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // User
     Route::get('/user', [AuthController::class, 'user']);
+    Route::get('/allUsers', [AuthController::class, 'allUsers']);
     Route::put('/user', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
@@ -47,7 +48,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/posts/{id}/likes', [LikeController::class, 'likeOrUnlike']); // like or dislike back a post
 
     // Sports Activities
-    Route::get('/sports_activities', [SportsActivityController::class, 'getAll']);
+    Route::get('/sports_activities', [SportsActivityController::class, 'getAll']); // all sports activities
     Route::post('/sports_activities', [SportsActivityController::class, 'store']); // create sports activity
     Route::get('/sports_activities/{id}', [SportsActivityController::class, 'show']); // get single sports activity
     Route::put('/sports_activities/{id}', [SportsActivityController::class, 'update']); // update sports activity
