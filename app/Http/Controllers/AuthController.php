@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -44,26 +46,24 @@ class AuthController extends Controller
 
         $user = User::where('email', $attrs['email'])->first();
 
-        if(!$user || !Hash::check($attrs['password'], $user->password))
-        {
+        if (!$user || !Hash::check($attrs['password'], $user->password)) {
             return response([
                 'message' => 'Invalid credentials'
             ], 401);
         }
 
-        $token = $user->createToken ('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
         return response([
             'user' => $user,
             'token' => $token
         ], 200);
-
     }
 
     // logout user
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-    
+
         return response([
             'message' => 'Logout success.'
         ], 200);
@@ -79,25 +79,30 @@ class AuthController extends Controller
 
     // get all users
     public function allUsers()
-{
-    $users = User::all();
-    return response(['users' => $users], 200);
-}
+    {
+        $users = User::all();
+        return response(['users' => $users], 200);
+    }
 
     // Update a specific user
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
+        $user = auth()->user();
+    
         $attrs = $request->validate([
-            'name' => 'required|unique:users,name,' . $user->id,
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required|min:6',
+            'name' => ['required', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'email_confirmation' => 'required|same:email',
         ]);
-
+    
         $user->name =  $attrs['name'];
+        // log name
+        Log::info('Name: ' . $attrs['name']);
+        Log::info('Email: ' . $attrs['email']);
         $user->email = $attrs['email'];
-        $user->password = Hash::make($attrs['password']);
+        /** @var \App\Models\User $user **/
         $user->save();
-
+    
         return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
     }
 
@@ -108,5 +113,4 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
-
 }
