@@ -88,21 +88,23 @@ class AuthController extends Controller
     public function update(Request $request)
     {
         $user = auth()->user();
-    
+
         $attrs = $request->validate([
             'name' => ['required', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'email_confirmation' => 'required|same:email',
         ]);
-    
+
         $user->name =  $attrs['name'];
-        // log name
-        Log::info('Name: ' . $attrs['name']);
-        Log::info('Email: ' . $attrs['email']);
         $user->email = $attrs['email'];
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images');
+            $user->image = $path;
+        }
         /** @var \App\Models\User $user **/
         $user->save();
-    
+
         return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
     }
 
