@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('sports_activity_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->integer('calories_burned_prediction');
-            $table->string('image')->nullable();
+            $table->string('youtube_link')->nullable();
             $table->timestamps();
         });
     }

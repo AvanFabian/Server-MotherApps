@@ -23,17 +23,19 @@ class ActivityRecordController extends Controller
         $activityRecord->duration = $request->duration;
         $activityRecord->total_calories_burned = $request->total_calories_burned;
         $activityRecord->save();
-    
+
         if ($request->has('sport_movement_ids')) {
             $sport_movement_ids = is_array($request->sport_movement_ids) ? $request->sport_movement_ids : explode(',', $request->sport_movement_ids);
             $activityRecord->sportsMovements()->attach($sport_movement_ids);
         }
-    
+
         return response()->json($activityRecord->load('sportsMovements'), 201);
     }
 
     public function show($userId)
     {
+        Log::info('User ID: ' . $userId);
+
         $activityRecords = ActivityRecord::where('user_id', $userId)
             ->with(['sportsActivity', 'sportsMovements'])
             ->get();
@@ -58,7 +60,7 @@ class ActivityRecordController extends Controller
     }
 
 
-    
+
     public function update(Request $request, ActivityRecord $activityRecord)
     {
         $activityRecord->update($request->all());

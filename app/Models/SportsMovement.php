@@ -13,7 +13,7 @@ class SportsMovement extends Model
         'sports_activity_id',
         'name',
         'calories_burned_prediction', //TODO: kalo BERMASALAH -> HAPUS YAK
-        'image',
+        'youtube_link',
     ];
 
     public function activityRecords()

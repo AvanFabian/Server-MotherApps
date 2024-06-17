@@ -19,7 +19,6 @@ class SportsActivityController extends Controller
         return response()->json($activities);
     }
 
-    // TODO: abaikan dulu soale ga dipake tapi jgn dihapus atau dikomen
     public function getMovementsByActivityName(Request $request)
     {
         $activity_name = $request->query('activity_name');
@@ -29,6 +28,7 @@ class SportsActivityController extends Controller
             return response()->json(['error' => 'No activity found with the given name'], 404);
         }
         $movements = $activity->sportsMovements;
+        Log::info('Movements: ' . json_encode($movements));
         return response()->json($movements);
     }
 
@@ -69,14 +69,6 @@ class SportsActivityController extends Controller
 
         // Return the predictions as a JSON response
         return response()->json($predictions);
-        // $predictions = DB::table('sports_movements')
-        //     ->whereIn('id', explode(',', $ids))
-        //     ->pluck('calories_burned_prediction');
-
-        // Log::info('Predictions: ' . json_encode($predictions));
-
-        // // Return the predictions as a JSON response
-        // return response()->json($predictions);
     }
 
     public function store(Request $request)

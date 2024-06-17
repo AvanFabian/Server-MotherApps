@@ -28,153 +28,132 @@ class SportsMovementSeeder extends Seeder
             SportsMovement::create([
                 'sports_activity_id' => $aerobic->id,
                 'name' => 'Walking',
-                // 'calories_burned_estimation' => 'Around 200-300 calories',z
                 'calories_burned_prediction' => 250,
-                'image' => 'images/walking.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=U8CCYGgPn60',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $aerobic->id,
                 'name' => 'Sepeda Statis',
-                // 'calories_burned_estimation' => 'Around 300-400 calories',
                 'calories_burned_prediction' => 300,
-                'image' => 'images/sepeda-statis.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=TsyvlIsWnKw',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $aerobic->id,
                 'name' => 'Running',
-                // 'calories_burned_estimation' => 'Around 300-500 calories',
                 'calories_burned_prediction' => 400,
-                'image' => 'images/running.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=s4_ZpnhBzYw',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $aerobic->id,
                 'name' => 'Swimming',
-                // 'calories_burned_estimation' => 'Around 300-500 calories',
                 'calories_burned_prediction' => 400,
-                'image' => 'images/swimming.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=wIDjz9uqN4w',
             ]);
             // Resistence
             SportsMovement::create([
                 'sports_activity_id' => $resistence->id,
                 'name' => 'Weight Lifting',
-                // 'calories_burned_estimation' => 'Around 200-400 calories',
                 'calories_burned_prediction' => 300,
-                'image' => 'images/weight-lifting.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=wIDjz9uqN4w',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $resistence->id,
                 'name' => 'Strength (with TRX Straps)',
-                // 'calories_burned_estimation' => 'Around 150-300 calories',
                 'calories_burned_prediction' => 200,
-                'image' => 'images/strength.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=iw45il0HwkA',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $resistence->id,
                 'name' => 'Strength (Push Up, Pull Up, Squat, Plank)',
-                // 'calories_burned_estimation' => 'Around 100-300 calories',
                 'calories_burned_prediction' => 200,
-                'image' => 'images/strength-2.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=iw45il0HwkA',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $resistence->id,
                 'name' => 'Load Machine',
-                // 'calories_burned_estimation' => 'Around 150-250 calories',
                 'calories_burned_prediction' => 200,
-                'image' => 'images/load-machine.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=iw45il0HwkA',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $resistence->id,
                 'name' => 'Strength (squats, lunges, burpees)',
-                // 'calories_burned_estimation' => 'Around 200-400 calories',
                 'calories_burned_prediction' => 300,
-                'image' => 'images/strength-3.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=iw45il0HwkA',
             ]);
             // Flexibility
             SportsMovement::create([
                 'sports_activity_id' => $flexibility->id,
                 'name' => 'Dynamic Stretching (harmstring, pinggul, bahu)',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/dynamic-stretching.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=rPLw0kk9los',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $flexibility->id,
                 'name' => 'Yoga Prenatal',
-                // 'calories_burned_estimation' => 'Around 100-200 calories',
                 'calories_burned_prediction' => 150,
-                'image' => 'images/yoga-prenatal.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=rPLw0kk9los',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $flexibility->id,
                 'name' => 'Pilates Prenatal',
-                // 'calories_burned_estimation' => 'Around 100-200 calories',
                 'calories_burned_prediction' => 150,
-                'image' => 'images/pilates-prenatal.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=rPLw0kk9los',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $flexibility->id,
                 'name' => 'Stretching with Gymball',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/stretching-gymball.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=rPLw0kk9los',
             ]);
             // Neuromotor
             SportsMovement::create([
                 'sports_activity_id' => $neuromotor->id,
                 'name' => 'Pilates',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/pilates.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=0ZgHkOWk-_8',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $neuromotor->id,
                 'name' => 'Yoga',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/yoga.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=0ZgHkOWk-_8',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $neuromotor->id,
                 'name' => 'Tai Chi',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/tai-chi.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=0ZgHkOWk-_8',
             ]);
             // Pelvic Floor Training
             SportsMovement::create([
                 'sports_activity_id' => $pelvic->id,
                 'name' => 'Kegel Exercise',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/kegel-exercise.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=_NuvqZG2bDI',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $pelvic->id,
                 'name' => 'Bridge',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/bridge.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=_NuvqZG2bDI',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $pelvic->id,
                 'name' => 'Squat',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/squat.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=_NuvqZG2bDI',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $pelvic->id,
                 'name' => 'Pelvic Tilt',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/pelvic-tilt.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=_NuvqZG2bDI',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $pelvic->id,
                 'name' => 'Cat Cow Stretch',
-                // 'calories_burned_estimation' => 'Around 50-100 calories',
                 'calories_burned_prediction' => 75,
-                'image' => 'images/cat-cow-stretch.jpg',
+                'youtube_link' => 'https://www.youtube.com/watch?v=_NuvqZG2bDI',
             ]);
         }
     }
