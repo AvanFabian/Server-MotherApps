@@ -54,7 +54,7 @@ class SportsMovementSeeder extends Seeder
                 'sports_activity_id' => $resistence->id,
                 'name' => 'Weight Lifting',
                 'calories_burned_prediction' => 300,
-                'youtube_link' => 'https://www.youtube.com/watch?v=wIDjz9uqN4w',
+                'youtube_link' => 'https://www.youtube.com/watch?v=iw45il0HwkA',
             ]);
             SportsMovement::create([
                 'sports_activity_id' => $resistence->id,
