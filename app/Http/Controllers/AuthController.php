@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -85,29 +86,47 @@ class AuthController extends Controller
     }
 
     // Update a specific user
+
     public function update(Request $request)
     {
-        $user = auth()->user();
-
-        $attrs = $request->validate([
-            'name' => ['required', Rule::unique('users')->ignore($user->id)],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+        $user = Auth::user();
+    
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
             'email_confirmation' => 'required|same:email',
+            'image' => 'nullable|string'
         ]);
-
-        $user->name =  $attrs['name'];
-        $user->email = $attrs['email'];
-
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images');
-            $user->image = $path;
-        }
+    
+        $image = $this->saveImage($request->image, 'users');
+        Log::info($image);
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->image = $image;
         /** @var \App\Models\User $user **/
         $user->save();
-
-        return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
+        // if ($request->has('image')) {
+        //     $imageData = $request->input('image');
+        //     $fileName = time() . '.png';
+    
+        //     // Decode the base64 string back to an image and store it
+        //     Storage::disk('public')->put($fileName, base64_decode($imageData));
+    
+        //     $user->image = $fileName;
+        // }
+    
+        // $user->name = $request->input('name');
+        // $user->email = $request->input('email');
+        // /** @var \App\Models\User $user **/
+        // $user->save();
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User updated successfully',
+            'user' => $user
+        ]);
     }
-
     // Delete a specific user
     public function destroy(User $user)
     {
