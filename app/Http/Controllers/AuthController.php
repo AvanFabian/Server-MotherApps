@@ -86,7 +86,6 @@ class AuthController extends Controller
     }
 
     // Update a specific user
-
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -95,7 +94,6 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'email_confirmation' => 'required|same:email',
-            'image' => 'nullable|string'
         ]);
     
         $image = $this->saveImage($request->image, 'users');
@@ -106,20 +104,6 @@ class AuthController extends Controller
         $user->image = $image;
         /** @var \App\Models\User $user **/
         $user->save();
-        // if ($request->has('image')) {
-        //     $imageData = $request->input('image');
-        //     $fileName = time() . '.png';
-    
-        //     // Decode the base64 string back to an image and store it
-        //     Storage::disk('public')->put($fileName, base64_decode($imageData));
-    
-        //     $user->image = $fileName;
-        // }
-    
-        // $user->name = $request->input('name');
-        // $user->email = $request->input('email');
-        // /** @var \App\Models\User $user **/
-        // $user->save();
     
         return response()->json([
             'status' => 'success',
