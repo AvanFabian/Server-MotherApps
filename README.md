@@ -1,1 +1,1 @@
-** RESTful API of MotherApps Interface
+RESTful API of MotherApps Interface
